@@ -8,7 +8,7 @@ var_dump($client->login('login', 'passwd'));
 
 var_dump($client->sensorInit());
 
-$devices = $client->publicSensors(50, [1, 2, 3]);
+$devices = $client->publicSensors([1, 2, 3], 50);
 
 foreach ($devices['devices'] as $device) {
     echo $device['id'], "\t", $device['name'], PHP_EOL;
