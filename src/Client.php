@@ -93,31 +93,22 @@ class Client
             switch ($result['errno']) {
                 case 400:
                     throw new SyntaxErrorException($result['error'], $result['errno']);
-                    break;
                 case 401:
                     throw new AuthorizationRequiredException($result['error'], $result['errno']);
-                    break;
                 case 403:
                     throw new AccessDeniedException($result['error'], $result['errno']);
-                    break;
                 case 404:
                     throw new NotFoundException($result['error'], $result['errno']);
-                    break;
                 case 423:
                     throw new BlockedException($result['error'], $result['errno']);
-                    break;
                 case 429:
                     throw new TooManyRequestsException($result['error'], $result['errno']);
-                    break;
                 case 434:
                     throw new ObjectDisabledException($result['error'], $result['errno']);
-                    break;
                 case 503:
                     throw new ServerIsNotAvailableException($result['error'], $result['errno']);
-                    break;
                 default:
                     throw new \Exception($result['error'], $result['errno']);
-                    break;
             }
         }
         return json_decode($response->getBody(), true);
@@ -126,7 +117,7 @@ class Client
     /**
      * запрос версии, имени пользователя, местонахождения, избранного и список типов датчиков
      *
-     * @return mixed
+     * @return array
      * @throws AccessDeniedException
      * @throws AuthorizationRequiredException
      * @throws BlockedException
@@ -150,7 +141,7 @@ class Client
     /**
      * запрос текущего местонахождение пользователя (точки отсчета)
      *
-     * @return mixed
+     * @return array
      * @throws AccessDeniedException
      * @throws AuthorizationRequiredException
      * @throws BlockedException
@@ -171,7 +162,7 @@ class Client
      *
      * @param $lat
      * @param $lng
-     * @return mixed
+     * @return array
      * @throws AccessDeniedException
      * @throws AuthorizationRequiredException
      * @throws BlockedException
@@ -221,11 +212,12 @@ class Client
     /**
      * Получение ближайших публичных датчиков
      *
-     * @param int $radius
      * @param array $types
-     * @param null $lat
-     * @param null $lng
-     * @return mixed
+     * @param int $radius
+     * @param float $lat
+     * @param float $lng
+     * @return array
+     *
      * @throws AccessDeniedException
      * @throws AuthorizationRequiredException
      * @throws BlockedException
@@ -236,7 +228,7 @@ class Client
      * @throws TooManyRequestsException
      * @throws \Exception
      */
-    public function publicSensors($radius = 100, $types = [], $lat = null, $lng = null)
+    public function publicSensors($types = [], $radius = 100, $lat = null, $lng = null)
     {
         $params = [
             'pub'        => 1,
@@ -257,11 +249,12 @@ class Client
      *
      * @param bool|false $my
      * @param bool|false $pub
-     * @param int $radius
      * @param array $types
-     * @param null $lat
-     * @param null $lng
-     * @return mixed
+     * @param int $radius
+     * @param float $lat
+     * @param float $lng
+     * @return array
+     *
      * @throws AccessDeniedException
      * @throws AuthorizationRequiredException
      * @throws BlockedException
@@ -272,7 +265,7 @@ class Client
      * @throws TooManyRequestsException
      * @throws \Exception
      */
-    public function sensorNear($my = false, $pub = false, $radius = 100, $types = [], $lat = null, $lng = null)
+    public function sensorNear($my = false, $pub = false, array $types = [], $radius = 100, $lat = null, $lng = null)
     {
         $params = [
             'my'        => intval($my),
@@ -291,8 +284,9 @@ class Client
     /**
      * запрос списка датчиков и их показаний по ID устр-ва мониторинга
      *
-     * @param $id
-     * @return mixed
+     * @param int $id
+     * @return array
+     *
      * @throws AccessDeniedException
      * @throws AuthorizationRequiredException
      * @throws BlockedException
@@ -316,7 +310,8 @@ class Client
      * список избранных датчиков и их показаний для авторизованного пользователя
      *
      * @param array $sensors
-     * @return mixed
+     * @return array
+     *
      * @throws AccessDeniedException
      * @throws AuthorizationRequiredException
      * @throws BlockedException
@@ -335,7 +330,7 @@ class Client
             $params['sensors'] = $sensors;
         }
 
-        return $this->request('sensorDev', $params);
+        return $this->request('sensorFav', $params);
     }
 
     /**
@@ -390,9 +385,10 @@ class Client
      * запрос списка ближайших к пользователю веб-камер
      *
      * @param int $radius
-     * @param null $lat
-     * @param null $lng
-     * @return mixed
+     * @param int $lat
+     * @param int $lng
+     * @return array
+     *
      * @throws AccessDeniedException
      * @throws AuthorizationRequiredException
      * @throws BlockedException
@@ -421,7 +417,8 @@ class Client
      * запрос списка снимков с веб-камеры по ее ID
      *
      * @param $id
-     * @return mixed
+     * @return array
+     *
      * @throws AccessDeniedException
      * @throws AuthorizationRequiredException
      * @throws BlockedException
@@ -444,9 +441,10 @@ class Client
     /**
      * авторизация пользователя при вводе логина и пароля
      *
-     * @param $login
-     * @param $passwd
-     * @return mixed
+     * @param string $login
+     * @param string $passwd
+     * @return array
+     *
      * @throws AccessDeniedException
      * @throws AuthorizationRequiredException
      * @throws BlockedException
@@ -470,7 +468,8 @@ class Client
     /**
      * завершение сеанса текущего пользователя
      *
-     * @return mixed
+     * @return array
+     *
      * @throws AccessDeniedException
      * @throws AuthorizationRequiredException
      * @throws BlockedException
@@ -490,7 +489,8 @@ class Client
      * определение местонахождения объекта с GPS
      *
      * @param $imei
-     * @return mixed
+     * @return array
+     *
      * @throws AccessDeniedException
      * @throws AuthorizationRequiredException
      * @throws BlockedException
