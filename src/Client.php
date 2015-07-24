@@ -56,7 +56,7 @@ class Client
     }
 
     /**
-     * @param $cmd -
+     * @param string $cmd -
      * @param array $params
      * @return mixed
      * @throws AccessDeniedException

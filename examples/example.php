@@ -10,7 +10,7 @@ var_dump($client->sensorInit());
 
 $devices = $client->publicSensors(50, [1, 2, 3]);
 
-foreach($devices['devices'] as $device) {
+foreach ($devices['devices'] as $device) {
     echo $device['id'], "\t", $device['name'], PHP_EOL;
     foreach ($device['sensors'] as $sensor) {
         echo "\t" . $sensor['id'], "\t", $sensor['name'], "\t", $sensor['value'], ' ', $sensor['unit'], PHP_EOL;
