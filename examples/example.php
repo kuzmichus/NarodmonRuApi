@@ -1,12 +1,3 @@
-# NarodmonRuApi
-
-
-Клиент для API сайте http://narodmon.ru/.
-
-Использование:
-
-```php
-
 <?php
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -28,5 +19,3 @@ foreach($devices['devices'] as $device) {
 }
 
 var_dump($client->logout());
-
-```

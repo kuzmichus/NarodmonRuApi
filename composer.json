@@ -1,0 +1,20 @@
+{
+  "name": "kuzmich/narodmon-ru-api",
+  "description": "Api for narodmon.ru",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Sergey V. Kuzin",
+      "email": "sergey@kuzin.name"
+    }
+  ],
+  "require": {
+    "guzzlehttp/guzzle": "~6.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "NarodmonApi\\": "src/"
+    }
+  }
+}
