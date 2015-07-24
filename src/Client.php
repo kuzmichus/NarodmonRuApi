@@ -12,16 +12,40 @@ use NarodmonApi\Exceptions\ServerIsNotAvailableException;
 use NarodmonApi\Exceptions\SyntaxErrorException;
 use NarodmonApi\Exceptions\TooManyRequestsException;
 
+/**
+ * Class Client
+ * @package NarodmonApi
+ */
 class Client
 {
+    /**
+     * @var string
+     */
     private $narodmonUrl = 'http://narodmon.ru/api';
 
+    /**
+     * @var null|string
+     */
     protected $uuid = null;
+    /**
+     * @var null|string
+     */
     protected $apiKey = null;
+    /**
+     * @var null|string
+     */
     protected $lang = null;
 
+    /**
+     * @var \GuzzleHttp\Client|null
+     */
     protected $client = null;
 
+    /**
+     * @param string $uuid
+     * @param string $apiKey
+     * @param string $lang
+     */
     public function __construct($uuid, $apiKey, $lang = 'ru')
     {
         $this->uuid = strtolower(md5($uuid));
@@ -31,6 +55,20 @@ class Client
         $this->client = new \GuzzleHttp\Client();
     }
 
+    /**
+     * @param $cmd -
+     * @param array $params
+     * @return mixed
+     * @throws AccessDeniedException
+     * @throws AuthorizationRequiredException
+     * @throws BlockedException
+     * @throws NotFoundException
+     * @throws ObjectDisabledException
+     * @throws ServerIsNotAvailableException
+     * @throws SyntaxErrorException
+     * @throws TooManyRequestsException
+     * @throws \Exception
+     */
     protected function request($cmd, $params = [])
     {
         $json = [
@@ -85,6 +123,20 @@ class Client
         return json_decode($response->getBody(), true);
     }
 
+    /**
+     * запрос версии, имени пользователя, местонахождения, избранного и список типов датчиков
+     *
+     * @return mixed
+     * @throws AccessDeniedException
+     * @throws AuthorizationRequiredException
+     * @throws BlockedException
+     * @throws NotFoundException
+     * @throws ObjectDisabledException
+     * @throws ServerIsNotAvailableException
+     * @throws SyntaxErrorException
+     * @throws TooManyRequestsException
+     * @throws \Exception
+     */
     public function sensorInit()
     {
         $params = [
@@ -95,11 +147,41 @@ class Client
         return $this->request('sensorInit', $params);
     }
 
+    /**
+     * запрос текущего местонахождение пользователя (точки отсчета)
+     *
+     * @return mixed
+     * @throws AccessDeniedException
+     * @throws AuthorizationRequiredException
+     * @throws BlockedException
+     * @throws NotFoundException
+     * @throws ObjectDisabledException
+     * @throws ServerIsNotAvailableException
+     * @throws SyntaxErrorException
+     * @throws TooManyRequestsException
+     * @throws \Exception
+     */
     public function getLocation()
     {
         return $this->request('getLocation');
     }
 
+    /**
+     * запрос установка нового местонахождение пользователя (точки отсчета)
+     *
+     * @param $lat
+     * @param $lng
+     * @return mixed
+     * @throws AccessDeniedException
+     * @throws AuthorizationRequiredException
+     * @throws BlockedException
+     * @throws NotFoundException
+     * @throws ObjectDisabledException
+     * @throws ServerIsNotAvailableException
+     * @throws SyntaxErrorException
+     * @throws TooManyRequestsException
+     * @throws \Exception
+     */
     public function setLocation($lat, $lng)
     {
         $params = [
@@ -110,6 +192,21 @@ class Client
         return $this->request('setLocation', $params);
     }
 
+    /**
+     * Получение личных датчиков если пользователь авторизован
+     *
+     * @param array $types
+     * @return array
+     * @throws AccessDeniedException
+     * @throws AuthorizationRequiredException
+     * @throws BlockedException
+     * @throws NotFoundException
+     * @throws ObjectDisabledException
+     * @throws ServerIsNotAvailableException
+     * @throws SyntaxErrorException
+     * @throws TooManyRequestsException
+     * @throws \Exception
+     */
     public function mySensors($types = [])
     {
         $params = [
@@ -121,6 +218,24 @@ class Client
         return $this->request('sensorNear', $params);
     }
 
+    /**
+     * Получение ближайших публичных датчиков
+     *
+     * @param int $radius
+     * @param array $types
+     * @param null $lat
+     * @param null $lng
+     * @return mixed
+     * @throws AccessDeniedException
+     * @throws AuthorizationRequiredException
+     * @throws BlockedException
+     * @throws NotFoundException
+     * @throws ObjectDisabledException
+     * @throws ServerIsNotAvailableException
+     * @throws SyntaxErrorException
+     * @throws TooManyRequestsException
+     * @throws \Exception
+     */
     public function publicSensors($radius = 100, $types = [], $lat = null, $lng = null)
     {
         $params = [
@@ -137,6 +252,26 @@ class Client
         return $this->request('sensorNear', $params);
     }
 
+    /**
+     * запрос списка ближайших к пользователю датчиков
+     *
+     * @param bool|false $my
+     * @param bool|false $pub
+     * @param int $radius
+     * @param array $types
+     * @param null $lat
+     * @param null $lng
+     * @return mixed
+     * @throws AccessDeniedException
+     * @throws AuthorizationRequiredException
+     * @throws BlockedException
+     * @throws NotFoundException
+     * @throws ObjectDisabledException
+     * @throws ServerIsNotAvailableException
+     * @throws SyntaxErrorException
+     * @throws TooManyRequestsException
+     * @throws \Exception
+     */
     public function sensorNear($my = false, $pub = false, $radius = 100, $types = [], $lat = null, $lng = null)
     {
         $params = [
@@ -153,6 +288,21 @@ class Client
         return $this->request('sensorNear', $params);
     }
 
+    /**
+     * запрос списка датчиков и их показаний по ID устр-ва мониторинга
+     *
+     * @param $id
+     * @return mixed
+     * @throws AccessDeniedException
+     * @throws AuthorizationRequiredException
+     * @throws BlockedException
+     * @throws NotFoundException
+     * @throws ObjectDisabledException
+     * @throws ServerIsNotAvailableException
+     * @throws SyntaxErrorException
+     * @throws TooManyRequestsException
+     * @throws \Exception
+     */
     public function sensorDev($id)
     {
         $params = [
@@ -162,17 +312,47 @@ class Client
         return $this->request('sensorDev', $params);
     }
 
-    public function sensorFav($sensors = null)
+    /**
+     * список избранных датчиков и их показаний для авторизованного пользователя
+     *
+     * @param array $sensors
+     * @return mixed
+     * @throws AccessDeniedException
+     * @throws AuthorizationRequiredException
+     * @throws BlockedException
+     * @throws NotFoundException
+     * @throws ObjectDisabledException
+     * @throws ServerIsNotAvailableException
+     * @throws SyntaxErrorException
+     * @throws TooManyRequestsException
+     * @throws \Exception
+     */
+    public function sensorFav(array $sensors = [])
     {
         $params = [];
 
-        if (is_array($sensors)) {
+        if (!empty($sensors)) {
             $params['sensors'] = $sensors;
         }
 
         return $this->request('sensorDev', $params);
     }
 
+    /**
+     * регулярное обновление показаний выбранных датчиков
+     *
+     * @param array $sensors
+     * @return mixed
+     * @throws AccessDeniedException
+     * @throws AuthorizationRequiredException
+     * @throws BlockedException
+     * @throws NotFoundException
+     * @throws ObjectDisabledException
+     * @throws ServerIsNotAvailableException
+     * @throws SyntaxErrorException
+     * @throws TooManyRequestsException
+     * @throws \Exception
+     */
     public function sensorInfo(array $sensors)
     {
         $params = [
@@ -182,6 +362,21 @@ class Client
         return $this->request('sensorInfo', $params);
     }
 
+    /**
+     * история показаний датчика за период (для графиков)
+     *
+     * @param $id
+     * @return mixed
+     * @throws AccessDeniedException
+     * @throws AuthorizationRequiredException
+     * @throws BlockedException
+     * @throws NotFoundException
+     * @throws ObjectDisabledException
+     * @throws ServerIsNotAvailableException
+     * @throws SyntaxErrorException
+     * @throws TooManyRequestsException
+     * @throws \Exception
+     */
     public function sensorLog($id)
     {
         $params = [
@@ -191,6 +386,23 @@ class Client
         return $this->request('sensorLog', $params);
     }
 
+    /**
+     * запрос списка ближайших к пользователю веб-камер
+     *
+     * @param int $radius
+     * @param null $lat
+     * @param null $lng
+     * @return mixed
+     * @throws AccessDeniedException
+     * @throws AuthorizationRequiredException
+     * @throws BlockedException
+     * @throws NotFoundException
+     * @throws ObjectDisabledException
+     * @throws ServerIsNotAvailableException
+     * @throws SyntaxErrorException
+     * @throws TooManyRequestsException
+     * @throws \Exception
+     */
     public function cameraNear($radius = 100, $lat = null, $lng = null)
     {
         $params = [
@@ -205,6 +417,21 @@ class Client
         return $this->request('cameraNear', $params);
     }
 
+    /**
+     * запрос списка снимков с веб-камеры по ее ID
+     *
+     * @param $id
+     * @return mixed
+     * @throws AccessDeniedException
+     * @throws AuthorizationRequiredException
+     * @throws BlockedException
+     * @throws NotFoundException
+     * @throws ObjectDisabledException
+     * @throws ServerIsNotAvailableException
+     * @throws SyntaxErrorException
+     * @throws TooManyRequestsException
+     * @throws \Exception
+     */
     public function cameraShots($id)
     {
         $params = [
@@ -214,6 +441,22 @@ class Client
         return $this->request('cameraShots', $params);
     }
 
+    /**
+     * авторизация пользователя при вводе логина и пароля
+     *
+     * @param $login
+     * @param $passwd
+     * @return mixed
+     * @throws AccessDeniedException
+     * @throws AuthorizationRequiredException
+     * @throws BlockedException
+     * @throws NotFoundException
+     * @throws ObjectDisabledException
+     * @throws ServerIsNotAvailableException
+     * @throws SyntaxErrorException
+     * @throws TooManyRequestsException
+     * @throws \Exception
+     */
     public function login($login, $passwd)
     {
         $params = [
@@ -224,11 +467,40 @@ class Client
         return $this->request('login', $params);
     }
 
+    /**
+     * завершение сеанса текущего пользователя
+     *
+     * @return mixed
+     * @throws AccessDeniedException
+     * @throws AuthorizationRequiredException
+     * @throws BlockedException
+     * @throws NotFoundException
+     * @throws ObjectDisabledException
+     * @throws ServerIsNotAvailableException
+     * @throws SyntaxErrorException
+     * @throws TooManyRequestsException
+     * @throws \Exception
+     */
     public function logout()
     {
         return $this->request('logout');
     }
 
+    /**
+     * определение местонахождения объекта с GPS
+     *
+     * @param $imei
+     * @return mixed
+     * @throws AccessDeniedException
+     * @throws AuthorizationRequiredException
+     * @throws BlockedException
+     * @throws NotFoundException
+     * @throws ObjectDisabledException
+     * @throws ServerIsNotAvailableException
+     * @throws SyntaxErrorException
+     * @throws TooManyRequestsException
+     * @throws \Exception
+     */
     public function objectWhere($imei)
     {
         $params = [
