@@ -58,7 +58,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             )
             ->willReturn(['foo' => 'bar']);
 
-        $this->assertEquals(['foo' => 'bar'], $client->setLocation(1,2));
+        $this->assertEquals(['foo' => 'bar'], $client->setLocation(1, 2));
     }
 
     public function testMySensors()
@@ -142,7 +142,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             )
             ->willReturn(['foo' => 'bar']);
 
-        $this->assertEquals(['foo' => 'bar'], $client->sensorNear(false, false, [1, 2], 200, 1,2));
+        $this->assertEquals(['foo' => 'bar'], $client->sensorNear(false, false, [1, 2], 200, 1, 2));
     }
 
     public function testSensorDev()
@@ -191,11 +191,11 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             ->method('request')
             ->with(
                 $this->equalTo('sensorFav'),
-                $this->equalTo(['sensors' => [1,2,3]])
+                $this->equalTo(['sensors' => [1, 2, 3]])
             )
             ->willReturn(['foo' => 'bar']);
 
-        $this->assertEquals(['foo' => 'bar'], $client->sensorFav([1,2,3]));
+        $this->assertEquals(['foo' => 'bar'], $client->sensorFav([1, 2, 3]));
     }
 
     public function testSensorInfo()
@@ -209,11 +209,11 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             ->method('request')
             ->with(
                 $this->equalTo('sensorInfo'),
-                $this->equalTo(['sensors'   => [1,2,3]])
+                $this->equalTo(['sensors'   => [1, 2, 3]])
             )
             ->willReturn(['foo' => 'bar']);
 
-        $this->assertEquals(['foo' => 'bar'], $client->sensorInfo([1,2,3]));
+        $this->assertEquals(['foo' => 'bar'], $client->sensorInfo([1, 2, 3]));
     }
 
     public function testSensorLog()
