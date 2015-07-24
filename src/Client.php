@@ -236,7 +236,7 @@ class Client
             'types'    => $types
         ];
 
-        if ($lat && $lng) {
+        if (null !== $lat && null !== $lng) {
             $params['lat']  = $lat;
             $params['lng']  = $lng;
         }
@@ -274,7 +274,7 @@ class Client
             'types'    => $types
         ];
 
-        if ($lat && $lng) {
+        if (null !== $lat && null !== $lng) {
             $params['lat']  = $lat;
             $params['lng']  = $lng;
         }
@@ -337,7 +337,8 @@ class Client
      * регулярное обновление показаний выбранных датчиков
      *
      * @param array $sensors
-     * @return mixed
+     * @return array
+     *
      * @throws AccessDeniedException
      * @throws AuthorizationRequiredException
      * @throws BlockedException
@@ -361,7 +362,8 @@ class Client
      * история показаний датчика за период (для графиков)
      *
      * @param $id
-     * @return mixed
+     * @return array
+     *
      * @throws AccessDeniedException
      * @throws AuthorizationRequiredException
      * @throws BlockedException
@@ -405,7 +407,7 @@ class Client
             'radius'   => $radius,
         ];
 
-        if ($lat && $lng) {
+        if (null !== $lat && null !== $lng) {
             $params['lat']  = $lat;
             $params['lng']  = $lng;
         }
