@@ -16,5 +16,13 @@
     "psr-4": {
       "NarodmonApi\\": "src/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "NarodmonApi\\Tests\\": "tests/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^4.7"
   }
 }
