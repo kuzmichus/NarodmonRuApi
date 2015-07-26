@@ -1,6 +1,8 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/kuzmichus/NarodmonRuApi/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/kuzmichus/NarodmonRuApi/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/kuzmichus/NarodmonRuApi/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/kuzmichus/NarodmonRuApi/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/kuzmichus/NarodmonRuApi/badges/build.png?b=master)](https://scrutinizer-ci.com/g/kuzmichus/NarodmonRuApi/build-status/master)
+[![Latest Stable Version](https://poser.pugx.org/kuzmich/narodmon-ru-api/v/stable)](https://packagist.org/packages/kuzmich/narodmon-ru-api)
+[![License](https://poser.pugx.org/kuzmich/narodmon-ru-api/license)](https://packagist.org/packages/kuzmich/narodmon-ru-api)
 
 
 # NarodmonRuApi
