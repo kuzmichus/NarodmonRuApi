@@ -1,5 +1,12 @@
 <?php
-
+/**
+ * PHP version 5.5
+ *
+ * @category Client
+ * @package  NarodmonApi
+ * @author   Sergey V. Kuzin <sergey@kuzin.name>
+ * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
 
 namespace NarodmonApi;
 
@@ -14,7 +21,11 @@ use NarodmonApi\Exceptions\TooManyRequestsException;
 
 /**
  * Class Client
- * @package NarodmonApi
+ *
+ * @category Client
+ * @package  NarodmonApi
+ * @author   Sergey V. Kuzin <sergey@kuzin.name>
+ * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 class Client
 {
@@ -56,8 +67,8 @@ class Client
     }
 
     /**
-     * @param string $cmd -
-     * @param array $params
+     * @param string $cmd    -
+     * @param array  $params
      * @return mixed
      * @throws AccessDeniedException
      * @throws AuthorizationRequiredException
@@ -83,32 +94,58 @@ class Client
             $params
         );
 
-        $response = $this->client->post($this->narodmonUrl, [
+        $response = $this->client->post(
+            $this->narodmonUrl, [
             'json'  =>$json
-        ]);
+            ]
+        );
 
         $result = json_decode($response->getBody(), true);
 
         if (isset($result['errno'])) {
             switch ($result['errno']) {
-                case 400:
-                    throw new SyntaxErrorException($result['error'], $result['errno']);
-                case 401:
-                    throw new AuthorizationRequiredException($result['error'], $result['errno']);
-                case 403:
-                    throw new AccessDeniedException($result['error'], $result['errno']);
-                case 404:
-                    throw new NotFoundException($result['error'], $result['errno']);
-                case 423:
-                    throw new BlockedException($result['error'], $result['errno']);
-                case 429:
-                    throw new TooManyRequestsException($result['error'], $result['errno']);
-                case 434:
-                    throw new ObjectDisabledException($result['error'], $result['errno']);
-                case 503:
-                    throw new ServerIsNotAvailableException($result['error'], $result['errno']);
-                default:
-                    throw new \Exception($result['error'], $result['errno']);
+            case 400:
+                throw new SyntaxErrorException(
+                    $result['error'],
+                    $result['errno']
+                );
+            case 401:
+                throw new AuthorizationRequiredException(
+                    $result['error'],
+                    $result['errno']
+                );
+            case 403:
+                throw new AccessDeniedException(
+                    $result['error'],
+                    $result['errno']
+                );
+            case 404:
+                throw new NotFoundException(
+                    $result['error'],
+                    $result['errno']
+                );
+            case 423:
+                throw new BlockedException(
+                    $result['error'],
+                    $result['errno']
+                );
+            case 429:
+                throw new TooManyRequestsException(
+                    $result['error'],
+                    $result['errno']
+                );
+            case 434:
+                throw new ObjectDisabledException(
+                    $result['error'],
+                    $result['errno']
+                );
+            case 503:
+                throw new ServerIsNotAvailableException(
+                    $result['error'],
+                    $result['errno']
+                );
+            default:
+                throw new \Exception($result['error'], $result['errno']);
             }
         }
         return json_decode($response->getBody(), true);
@@ -118,6 +155,7 @@ class Client
      * запрос версии, имени пользователя, местонахождения, избранного и список типов датчиков
      *
      * @return array
+     *
      * @throws AccessDeniedException
      * @throws AuthorizationRequiredException
      * @throws BlockedException
@@ -142,6 +180,7 @@ class Client
      * запрос текущего местонахождение пользователя (точки отсчета)
      *
      * @return array
+     *
      * @throws AccessDeniedException
      * @throws AuthorizationRequiredException
      * @throws BlockedException
@@ -162,7 +201,9 @@ class Client
      *
      * @param $lat
      * @param $lng
+     *
      * @return array
+     *
      * @throws AccessDeniedException
      * @throws AuthorizationRequiredException
      * @throws BlockedException
@@ -187,7 +228,9 @@ class Client
      * Получение личных датчиков если пользователь авторизован
      *
      * @param array $types
+     *
      * @return array
+     *
      * @throws AccessDeniedException
      * @throws AuthorizationRequiredException
      * @throws BlockedException
@@ -213,9 +256,10 @@ class Client
      * Получение ближайших публичных датчиков
      *
      * @param array $types
-     * @param int $radius
+     * @param int   $radius
      * @param float $lat
      * @param float $lng
+     *
      * @return array
      *
      * @throws AccessDeniedException
@@ -249,10 +293,11 @@ class Client
      *
      * @param bool|false $my
      * @param bool|false $pub
-     * @param array $types
-     * @param int $radius
-     * @param float $lat
-     * @param float $lng
+     * @param array      $types
+     * @param int        $radius
+     * @param float      $lat
+     * @param float      $lng
+     *
      * @return array
      *
      * @throws AccessDeniedException
@@ -285,6 +330,7 @@ class Client
      * запрос списка датчиков и их показаний по ID устр-ва мониторинга
      *
      * @param int $id
+     *
      * @return array
      *
      * @throws AccessDeniedException
@@ -310,6 +356,7 @@ class Client
      * список избранных датчиков и их показаний для авторизованного пользователя
      *
      * @param array $sensors
+     *
      * @return array
      *
      * @throws AccessDeniedException
@@ -337,6 +384,7 @@ class Client
      * регулярное обновление показаний выбранных датчиков
      *
      * @param array $sensors
+     *
      * @return array
      *
      * @throws AccessDeniedException
@@ -362,6 +410,7 @@ class Client
      * история показаний датчика за период (для графиков)
      *
      * @param $id
+     *
      * @return array
      *
      * @throws AccessDeniedException
@@ -389,6 +438,7 @@ class Client
      * @param int $radius
      * @param int $lat
      * @param int $lng
+     *
      * @return array
      *
      * @throws AccessDeniedException
@@ -418,7 +468,8 @@ class Client
     /**
      * запрос списка снимков с веб-камеры по ее ID
      *
-     * @param $id
+     * @param int $id - ID веб-камеры из ссылки вида http://narodmon.ru/-ID в балуне на карте.
+     *
      * @return array
      *
      * @throws AccessDeniedException
@@ -445,6 +496,7 @@ class Client
      *
      * @param string $login
      * @param string $passwd
+     *
      * @return array
      *
      * @throws AccessDeniedException
@@ -490,7 +542,8 @@ class Client
     /**
      * определение местонахождения объекта с GPS
      *
-     * @param $imei
+     * @param string $imei 15-значный числовой серийный номер устр-ва, указанный в Мои GPS
+     *
      * @return array
      *
      * @throws AccessDeniedException

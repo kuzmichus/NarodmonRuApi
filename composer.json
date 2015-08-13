@@ -1,7 +1,8 @@
 {
   "name": "kuzmich/narodmon-ru-api",
   "description": "Api for narodmon.ru",
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
+  "homepage": "https://github.com/kuzmichus/NarodmonRuApi",
   "license": "MIT",
   "authors": [
     {
@@ -24,5 +25,10 @@
   },
   "require-dev": {
     "phpunit/phpunit": "^4.7"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.2.x-dev"
+    }
   }
 }

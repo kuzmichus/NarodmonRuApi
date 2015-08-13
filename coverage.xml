@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1437768500">
-  <project timestamp="1437768500">
+<coverage generated="1437846448">
+  <project timestamp="1437846448">
     <package name="NarodmonApi">
-      <file name="/www/NarodmonRuApi/src/Client.php">
+      <file name="/www/smarty/vendor/kuzmich/narodmon-ru-api/src/Client.php">
         <class name="Client" namespace="NarodmonApi" fullPackage="NarodmonApi" package="NarodmonApi">
           <metrics methods="17" coveredmethods="16" conditionals="0" coveredconditionals="0" statements="99" coveredstatements="66" elements="116" coveredelements="82"/>
         </class>
@@ -91,90 +91,90 @@
         <line num="330" type="stmt" count="1"/>
         <line num="331" type="stmt" count="1"/>
         <line num="333" type="stmt" count="2"/>
-        <line num="351" type="method" name="sensorInfo" crap="1" count="1"/>
-        <line num="354" type="stmt" count="1"/>
+        <line num="352" type="method" name="sensorInfo" crap="1" count="1"/>
         <line num="355" type="stmt" count="1"/>
-        <line num="357" type="stmt" count="1"/>
-        <line num="375" type="method" name="sensorLog" crap="1" count="1"/>
-        <line num="378" type="stmt" count="1"/>
-        <line num="379" type="stmt" count="1"/>
+        <line num="356" type="stmt" count="1"/>
+        <line num="358" type="stmt" count="1"/>
+        <line num="377" type="method" name="sensorLog" crap="1" count="1"/>
+        <line num="380" type="stmt" count="1"/>
         <line num="381" type="stmt" count="1"/>
-        <line num="402" type="method" name="cameraNear" crap="3" count="2"/>
-        <line num="405" type="stmt" count="2"/>
-        <line num="406" type="stmt" count="2"/>
+        <line num="383" type="stmt" count="1"/>
+        <line num="404" type="method" name="cameraNear" crap="3" count="2"/>
+        <line num="407" type="stmt" count="2"/>
         <line num="408" type="stmt" count="2"/>
-        <line num="409" type="stmt" count="1"/>
-        <line num="410" type="stmt" count="1"/>
+        <line num="410" type="stmt" count="2"/>
         <line num="411" type="stmt" count="1"/>
-        <line num="413" type="stmt" count="2"/>
-        <line num="432" type="method" name="cameraShots" crap="1" count="1"/>
-        <line num="435" type="stmt" count="1"/>
-        <line num="436" type="stmt" count="1"/>
+        <line num="412" type="stmt" count="1"/>
+        <line num="413" type="stmt" count="1"/>
+        <line num="415" type="stmt" count="2"/>
+        <line num="434" type="method" name="cameraShots" crap="1" count="1"/>
+        <line num="437" type="stmt" count="1"/>
         <line num="438" type="stmt" count="1"/>
-        <line num="458" type="method" name="login" crap="1" count="1"/>
-        <line num="461" type="stmt" count="1"/>
-        <line num="462" type="stmt" count="1"/>
+        <line num="440" type="stmt" count="1"/>
+        <line num="460" type="method" name="login" crap="1" count="1"/>
         <line num="463" type="stmt" count="1"/>
+        <line num="464" type="stmt" count="1"/>
         <line num="465" type="stmt" count="1"/>
-        <line num="483" type="method" name="logout" crap="1" count="1"/>
-        <line num="485" type="stmt" count="1"/>
-        <line num="504" type="method" name="objectWhere" crap="1" count="1"/>
-        <line num="507" type="stmt" count="1"/>
-        <line num="508" type="stmt" count="1"/>
+        <line num="467" type="stmt" count="1"/>
+        <line num="485" type="method" name="logout" crap="1" count="1"/>
+        <line num="487" type="stmt" count="1"/>
+        <line num="506" type="method" name="objectWhere" crap="1" count="1"/>
+        <line num="509" type="stmt" count="1"/>
         <line num="510" type="stmt" count="1"/>
-        <metrics loc="512" ncloc="231" classes="1" methods="17" coveredmethods="16" conditionals="0" coveredconditionals="0" statements="99" coveredstatements="66" elements="116" coveredelements="82"/>
+        <line num="512" type="stmt" count="1"/>
+        <metrics loc="514" ncloc="231" classes="1" methods="17" coveredmethods="16" conditionals="0" coveredconditionals="0" statements="99" coveredstatements="66" elements="116" coveredelements="82"/>
       </file>
     </package>
     <package name="NarodmonApi\Exceptions">
-      <file name="/www/NarodmonRuApi/src/Exceptions/AccessDeniedException.php">
+      <file name="/www/smarty/vendor/kuzmich/narodmon-ru-api/src/Exceptions/AccessDeniedException.php">
         <class name="AccessDeniedException" namespace="NarodmonApi\Exceptions">
           <metrics methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="8" ncloc="8" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
-      <file name="/www/NarodmonRuApi/src/Exceptions/AuthorizationRequiredException.php">
+      <file name="/www/smarty/vendor/kuzmich/narodmon-ru-api/src/Exceptions/AuthorizationRequiredException.php">
         <class name="AuthorizationRequiredException" namespace="NarodmonApi\Exceptions">
           <metrics methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="8" ncloc="8" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
-      <file name="/www/NarodmonRuApi/src/Exceptions/BlockedException.php">
+      <file name="/www/smarty/vendor/kuzmich/narodmon-ru-api/src/Exceptions/BlockedException.php">
         <class name="BlockedException" namespace="NarodmonApi\Exceptions">
           <metrics methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="8" ncloc="8" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
-      <file name="/www/NarodmonRuApi/src/Exceptions/NotFoundException.php">
+      <file name="/www/smarty/vendor/kuzmich/narodmon-ru-api/src/Exceptions/NotFoundException.php">
         <class name="NotFoundException" namespace="NarodmonApi\Exceptions">
           <metrics methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="8" ncloc="8" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
-      <file name="/www/NarodmonRuApi/src/Exceptions/ObjectDisabledException.php">
+      <file name="/www/smarty/vendor/kuzmich/narodmon-ru-api/src/Exceptions/ObjectDisabledException.php">
         <class name="ObjectDisabledException" namespace="NarodmonApi\Exceptions">
           <metrics methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="8" ncloc="8" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
-      <file name="/www/NarodmonRuApi/src/Exceptions/ServerIsNotAvailableException.php">
+      <file name="/www/smarty/vendor/kuzmich/narodmon-ru-api/src/Exceptions/ServerIsNotAvailableException.php">
         <class name="ServerIsNotAvailableException" namespace="NarodmonApi\Exceptions">
           <metrics methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="8" ncloc="8" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
-      <file name="/www/NarodmonRuApi/src/Exceptions/SyntaxErrorException.php">
+      <file name="/www/smarty/vendor/kuzmich/narodmon-ru-api/src/Exceptions/SyntaxErrorException.php">
         <class name="SyntaxErrorException" namespace="NarodmonApi\Exceptions">
           <metrics methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="8" ncloc="8" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
-      <file name="/www/NarodmonRuApi/src/Exceptions/TooManyRequestsException.php">
+      <file name="/www/smarty/vendor/kuzmich/narodmon-ru-api/src/Exceptions/TooManyRequestsException.php">
         <class name="TooManyRequestsException" namespace="NarodmonApi\Exceptions">
           <metrics methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="8" ncloc="8" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
     </package>
-    <metrics files="9" loc="576" ncloc="295" classes="9" methods="17" coveredmethods="16" conditionals="0" coveredconditionals="0" statements="99" coveredstatements="66" elements="116" coveredelements="82"/>
+    <metrics files="9" loc="578" ncloc="295" classes="9" methods="17" coveredmethods="16" conditionals="0" coveredconditionals="0" statements="99" coveredstatements="66" elements="116" coveredelements="82"/>
   </project>
 </coverage>
