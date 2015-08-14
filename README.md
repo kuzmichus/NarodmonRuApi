@@ -8,7 +8,7 @@
 # NarodmonRuApi
 
 
-Клиент для API сайте http://narodmon.ru/.
+Клиент для API сайте  http://narodmon.ru/.
 
 Использование:
 
