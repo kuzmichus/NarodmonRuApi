@@ -52,6 +52,9 @@ class Client
      */
     protected $client = null;
 
+    /** @var \Psr\Cache\CacheItemPoolInterface */
+    protected $cache = null;
+
     /**
      * @param string $uuid
      * @param string $apiKey
@@ -63,7 +66,13 @@ class Client
         $this->apiKey = $apiKey;
         $this->lang = $lang;
 
+        $this->cache = new \Psr\Cache\NullCacheItemPool();
         $this->client = new \GuzzleHttp\Client();
+    }
+
+    public function setCache(\Psr\Cache\CacheItemPoolInterface $cache)
+    {
+        $this->cache = $cache;
     }
 
     /**
@@ -94,61 +103,69 @@ class Client
             $params
         );
 
-        $response = $this->client->post(
-            $this->narodmonUrl, [
-            'json'  =>$json
-            ]
-        );
+        $key = 'narodmon-' . md5(serialize($json));
 
-        $result = json_decode($response->getBody(), true);
+        $item = $this->cache->getItem($key);
+        if ($item->exists()) {
+            $result = $item->get();
+        } else {
+            $response = $this->client->post(
+                $this->narodmonUrl, [
+                    'json' => $json
+                ]
+            );
 
-        if (isset($result['errno'])) {
-            switch ($result['errno']) {
-            case 400:
-                throw new SyntaxErrorException(
-                    $result['error'],
-                    $result['errno']
-                );
-            case 401:
-                throw new AuthorizationRequiredException(
-                    $result['error'],
-                    $result['errno']
-                );
-            case 403:
-                throw new AccessDeniedException(
-                    $result['error'],
-                    $result['errno']
-                );
-            case 404:
-                throw new NotFoundException(
-                    $result['error'],
-                    $result['errno']
-                );
-            case 423:
-                throw new BlockedException(
-                    $result['error'],
-                    $result['errno']
-                );
-            case 429:
-                throw new TooManyRequestsException(
-                    $result['error'],
-                    $result['errno']
-                );
-            case 434:
-                throw new ObjectDisabledException(
-                    $result['error'],
-                    $result['errno']
-                );
-            case 503:
-                throw new ServerIsNotAvailableException(
-                    $result['error'],
-                    $result['errno']
-                );
-            default:
-                throw new \Exception($result['error'], $result['errno']);
+            if (isset($result['errno'])) {
+                switch ($result['errno']) {
+                case 400:
+                    throw new SyntaxErrorException(
+                        $result['error'],
+                        $result['errno']
+                    );
+                case 401:
+                    throw new AuthorizationRequiredException(
+                        $result['error'],
+                        $result['errno']
+                    );
+                case 403:
+                    throw new AccessDeniedException(
+                        $result['error'],
+                        $result['errno']
+                    );
+                case 404:
+                    throw new NotFoundException(
+                        $result['error'],
+                        $result['errno']
+                    );
+                case 423:
+                    throw new BlockedException(
+                        $result['error'],
+                        $result['errno']
+                    );
+                case 429:
+                    throw new TooManyRequestsException(
+                        $result['error'],
+                        $result['errno']
+                    );
+                case 434:
+                    throw new ObjectDisabledException(
+                        $result['error'],
+                        $result['errno']
+                    );
+                case 503:
+                    throw new ServerIsNotAvailableException(
+                        $result['error'],
+                        $result['errno']
+                    );
+                default:
+                    throw new \Exception($result['error'], $result['errno']);
+                }
             }
+            $result = json_decode($response->getBody(), true);
+            $item->set($result, 60*5);
+            $this->cache->save($item);
         }
-        return json_decode($response->getBody(), true);
+        return $result;
     }
 
     /**
