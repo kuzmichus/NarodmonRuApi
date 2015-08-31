@@ -58,7 +58,8 @@ class Client
     /**
      * @param string $uuid
      * @param string $apiKey
-     * @param string $lang
+     * @param string $lang язык
+     * @api
      */
     public function __construct($uuid, $apiKey, $lang = 'ru')
     {
@@ -70,14 +71,18 @@ class Client
         $this->client = new \GuzzleHttp\Client();
     }
 
+    /**
+     * @param \Psr\Cache\CacheItemPoolInterface $cache
+     * @api
+     */
     public function setCache(\Psr\Cache\CacheItemPoolInterface $cache)
     {
         $this->cache = $cache;
     }
 
     /**
-     * @param string $cmd    -
-     * @param array  $params
+     * @param string $cmd  команда
+     * @param array  $params параметры
      * @return mixed
      * @throws AccessDeniedException
      * @throws AuthorizationRequiredException
@@ -88,6 +93,8 @@ class Client
      * @throws SyntaxErrorException
      * @throws TooManyRequestsException
      * @throws \Exception
+     *
+     * @api
      */
     protected function request($cmd, $params = [])
     {
@@ -182,6 +189,8 @@ class Client
      * @throws SyntaxErrorException
      * @throws TooManyRequestsException
      * @throws \Exception
+     *
+     * @api
      */
     public function sensorInit()
     {
@@ -207,6 +216,8 @@ class Client
      * @throws SyntaxErrorException
      * @throws TooManyRequestsException
      * @throws \Exception
+     *
+     * @api
      */
     public function getLocation()
     {
@@ -216,8 +227,8 @@ class Client
     /**
      * запрос установка нового местонахождение пользователя (точки отсчета)
      *
-     * @param $lat
-     * @param $lng
+     * @param float $lat
+     * @param float $lng
      *
      * @return array
      *
@@ -230,6 +241,8 @@ class Client
      * @throws SyntaxErrorException
      * @throws TooManyRequestsException
      * @throws \Exception
+     *
+     * @api
      */
     public function setLocation($lat, $lng)
     {
@@ -244,7 +257,7 @@ class Client
     /**
      * Получение личных датчиков если пользователь авторизован
      *
-     * @param array $types
+     * @param array $types тип датчиков
      *
      * @return array
      *
@@ -257,6 +270,8 @@ class Client
      * @throws SyntaxErrorException
      * @throws TooManyRequestsException
      * @throws \Exception
+     *
+     * @api
      */
     public function mySensors($types = [])
     {
@@ -272,7 +287,7 @@ class Client
     /**
      * Получение ближайших публичных датчиков
      *
-     * @param array $types
+     * @param array $types тип датчиков
      * @param int   $radius
      * @param float $lat
      * @param float $lng
@@ -288,6 +303,8 @@ class Client
      * @throws SyntaxErrorException
      * @throws TooManyRequestsException
      * @throws \Exception
+     *
+     * @api
      */
     public function publicSensors($types = [], $radius = 100, $lat = null, $lng = null)
     {
@@ -308,10 +325,10 @@ class Client
     /**
      * запрос списка ближайших к пользователю датчиков
      *
-     * @param bool|false $my
-     * @param bool|false $pub
-     * @param array      $types
-     * @param int        $radius
+     * @param bool|false $my свои датчики
+     * @param bool|false $pub публичные датчики
+     * @param array      $types тип датчиков
+     * @param int        $radius радиус в метрах
      * @param float      $lat
      * @param float      $lng
      *
@@ -326,6 +343,8 @@ class Client
      * @throws SyntaxErrorException
      * @throws TooManyRequestsException
      * @throws \Exception
+     *
+     * @api
      */
     public function sensorNear($my = false, $pub = false, array $types = [], $radius = 100, $lat = null, $lng = null)
     {
@@ -359,6 +378,8 @@ class Client
      * @throws SyntaxErrorException
      * @throws TooManyRequestsException
      * @throws \Exception
+     *
+     * @api
      */
     public function sensorDev($id)
     {
@@ -385,6 +406,8 @@ class Client
      * @throws SyntaxErrorException
      * @throws TooManyRequestsException
      * @throws \Exception
+     *
+     * @api
      */
     public function sensorFav(array $sensors = [])
     {
@@ -413,6 +436,8 @@ class Client
      * @throws SyntaxErrorException
      * @throws TooManyRequestsException
      * @throws \Exception
+     *
+     * @api
      */
     public function sensorInfo(array $sensors)
     {
@@ -426,7 +451,7 @@ class Client
     /**
      * история показаний датчика за период (для графиков)
      *
-     * @param $id
+     * @param int $id id устройства
      *
      * @return array
      *
@@ -439,6 +464,8 @@ class Client
      * @throws SyntaxErrorException
      * @throws TooManyRequestsException
      * @throws \Exception
+     *
+     * @api
      */
     public function sensorLog($id)
     {
@@ -452,9 +479,9 @@ class Client
     /**
      * запрос списка ближайших к пользователю веб-камер
      *
-     * @param int $radius
-     * @param int $lat
-     * @param int $lng
+     * @param int $radius радиус в метрах
+     * @param int $lat координата
+     * @param int $lng координата
      *
      * @return array
      *
@@ -467,6 +494,8 @@ class Client
      * @throws SyntaxErrorException
      * @throws TooManyRequestsException
      * @throws \Exception
+     *
+     * @api
      */
     public function cameraNear($radius = 100, $lat = null, $lng = null)
     {
@@ -498,6 +527,8 @@ class Client
      * @throws SyntaxErrorException
      * @throws TooManyRequestsException
      * @throws \Exception
+     *
+     * @api
      */
     public function cameraShots($id)
     {
@@ -511,8 +542,8 @@ class Client
     /**
      * авторизация пользователя при вводе логина и пароля
      *
-     * @param string $login
-     * @param string $passwd
+     * @param string $login логин
+     * @param string $passwd пароль
      *
      * @return array
      *
@@ -525,6 +556,8 @@ class Client
      * @throws SyntaxErrorException
      * @throws TooManyRequestsException
      * @throws \Exception
+     *
+     * @api
      */
     public function login($login, $passwd)
     {
@@ -537,7 +570,7 @@ class Client
     }
 
     /**
-     * завершение сеанса текущего пользователя
+     * Завершение сеанса текущего пользователя
      *
      * @return array
      *
@@ -550,6 +583,8 @@ class Client
      * @throws SyntaxErrorException
      * @throws TooManyRequestsException
      * @throws \Exception
+     *
+     * @api
      */
     public function logout()
     {
@@ -559,7 +594,7 @@ class Client
     /**
      * определение местонахождения объекта с GPS
      *
-     * @param string $imei 15-значный числовой серийный номер устр-ва, указанный в Мои GPS
+     * @param string $imei 15-значный числовой серийный номер устрйства, указанный в Мои GPS
      *
      * @return array
      *
@@ -572,6 +607,8 @@ class Client
      * @throws SyntaxErrorException
      * @throws TooManyRequestsException
      * @throws \Exception
+     *
+     * @api
      */
     public function objectWhere($imei)
     {
