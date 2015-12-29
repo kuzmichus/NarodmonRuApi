@@ -67,7 +67,7 @@ class Client
         $this->apiKey = $apiKey;
         $this->lang = $lang;
 
-        $this->cache = new \Psr\Cache\NullCacheItemPool();
+        $this->cache = new \Fig\Cache\Memory\MemoryPool();
         $this->client = new \GuzzleHttp\Client();
     }
 

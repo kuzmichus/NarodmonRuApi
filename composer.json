@@ -12,7 +12,7 @@
   ],
   "require": {
     "guzzlehttp/guzzle": "~5.0",
-    "kuzmich/cache": "dev-master"
+    "psr/cache-util": "1.0.x-dev"
   },
   "autoload": {
     "psr-4": {
