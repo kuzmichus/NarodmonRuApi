@@ -113,7 +113,7 @@ class Client
         $key = 'narodmon-' . md5(serialize($json));
 
         $item = $this->cache->getItem($key);
-        if ($item->exists()) {
+        if (false && $item->exists()) {
             $result = $item->get();
         } else {
             $response = $this->client->post(
