@@ -11,7 +11,7 @@
     }
   ],
   "require": {
-    "guzzlehttp/guzzle": "~5.0",
+    "guzzlehttp/guzzle": "~5.0|~6.0",
     "psr/cache-util": "1.0.x-dev"
   },
   "autoload": {
